@@ -35,5 +35,6 @@
 - [20180811](./Thinking&Life/20180811.md)
 - [20180817](./Thinking&Life/20180817.md)
 - [20180828](./Thinking&Life/20180828.md)
+- [20190816](./Thinking&Life/20190816.md)
 
 ## Reading
