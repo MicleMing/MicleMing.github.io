@@ -18,6 +18,7 @@
 - [一个外行眼里的人工智能](./ML/1/index.md)
 - [线性回归](./ML/2/linear_regression.md)
 - [逻辑回归—— Yes Or No](./ML/3/logictis.md)
+- [让你的程序学会打乒乓球](./ML/4/pingpong.md)
 
 ## CS & Engineering
 - [一个数学表达式的计算](./CS&Engineering/Algorithm/program.md)
