@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<!--STATUS OK-->
+<html>
+
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="referrer" content="always" />
+<meta name="description" content="卷积的词条图片">
+<title>卷积图片_百度百科</title>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="icon" sizes="any" mask href="//www.baidu.com/img/baidu.svg">
+
+<meta name="keywords" content="卷积 卷积_图片 百度百科 百科 baike 词条图片">
+<meta name="image" content="https://bkssl.bdimg.com/cms/static/baike.png">
+<meta itemprop="image" content="https://bkssl.bdimg.com/cms/static/baike.png">
+
+<!--[if lte IE 9]>
+<script>
+    (function() {
+      var e = "abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(","),
+        i = e.length;
+      while (i--) {
+        document.createElement(e[i]);
+      }
+
+      window.console = window.console || {};
+      var f = ['log', 'info', 'warning', 'error', 'clear'];
+      var l = f.length;
+      while(l--) {
+        window.console[f[l]] = function () {};
+      }
+    })();
+  </script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="https://bkssl.bdimg.com/static/wiki-common/pkg/wiki-common-base_66a9374.css"/><link rel="stylesheet" type="text/css" href="https://bkssl.bdimg.com/static/wiki-common/widget/component/userbar-n/userbar-n_2890903.css"/><link rel="stylesheet" type="text/css" href="https://bkssl.bdimg.com/static/wiki-common/widget/lib/larkplayer/larkplayer_981c735.css"/><link rel="stylesheet" type="text/css" href="https://bkssl.bdimg.com/static/wiki-common/widget/lib/webuploader/webuploader_08d9db4.css"/><link rel="stylesheet" type="text/css" href="https://bkssl.bdimg.com/static/wiki-album/pkg/wiki-album-picture_bca8f93.css"/>    
+</head>
+<body class="w-small">
+
+
+<script>
+        var imageResize = function(event) {
+            var picture = document.getElementById('imgPicture');
+            var parent = document.getElementById('picture');
+            var pHeight = document.body.clientHeight - 102;
+            parent.style.height = pHeight + 'px';
+            var rWidth = picture.width,
+                rHeight = picture.height,
+                pWidth = parent.offsetWidth;
+
+                var rateW = rWidth / pWidth,
+                    rateH = rHeight / pHeight;
+                var w = rWidth,
+                    h = rHeight;
+
+                if (rateW > 1 || rateH > 1) {
+                    if (rateW > rateH) {
+                        w = pWidth;
+                        h = rHeight / rateW;
+                    } else {
+                        h = pHeight;
+                        w = rWidth / rateH;
+                    }
+                }
+                        
+            picture.style.width = w + 'px';
+            picture.style.height = h + 'px';
+            picture.style.marginTop = (pHeight - h) / 2 + 'px';
+            picture.style.visibility = 'visible';
+        };
+
+        // 以下代码的功能是：在页面加载前，判断url中的对应值是否等于hash值，如不等，则改变url重新加载
+        // 添加代码原因：
+        //     1) 之前的代码逻辑是：url会具体指定到某张图片，前端在｀切换相册｀时，使用ajax获取数据，并不断更新hash值，但当用户
+        //        ｀刷新页面｀或｀点击返回词条按钮｀然后再｀点击浏览器后退键｀时，uri中的url和hash值不同，源代码会出现bug,导致
+        //        '上／下一图册'，'向上／下箭头'点击无效（具体原因请view代码）
+        //     2) hash值的使用无意义，页面刷新后并不能让用户回到之前访问的图片/图册
+        // 故作此修改。
+        // 个人认为比较合适的解决方法是：
+        //     1）图册页的图片数据是后端同步打过来的。在词条页面中，图册url不要具体到某张图片，到图册即可，由前端使用hash值加上
+        //        smarty的方法来控制具体到哪张图片，在切换图册时，刷新浏览器，改变url。
+        //     2) 图册页不需要同步的图片数据，全部由前端根据uri利用ajax获取。
+        // COMMENT BY YUHUI
+
+
+        //在此处不知道怎么使用require，所以自己写了一个将hash值转换为对象的函数
+        //另外，在 wiki-common:widget/util/url.js 下有url相关函数
+        //eg: hashStr = '#aid=19973219&pic=f7' => hashObj = {aid: '19973219', pic: 'f7'};
+        //COMMENT BY YUHUI
+        function makeHashIntoObj (hashStr) {
+            if (hashStr[0] === '#') {
+                hashStr = hashStr.substr(1);
+            }
+            var hashObj = {};
+            var hashArr = hashStr.split('&');
+            var tempArr = [];
+            for (var i = 0; i < hashArr.length; i++) {
+                tempArr = hashArr[i].split('=');
+                hashObj[tempArr[0]] = tempArr[1];
+            }
+            return hashObj;
+        }
+        // locationArr = ['', 'pic', $lemmaTitle, $newLemmaId, albumId, picSign];
+        var locationArr = window.location.pathname.split('/');
+        var hashObj = makeHashIntoObj(window.location.hash);
+        var picSign = locationArr[locationArr.length - 1];
+        var albumId = locationArr[locationArr.length - 2];
+        var picSignInHash = hashObj['pic'];
+        var albumIdInHash = hashObj['aid'];
+        if (!!picSignInHash && !!albumIdInHash && !!picSign && !!albumId) {
+            if (picSign != picSignInHash || albumId != albumIdInHash) {
+                locationArr[locationArr.length - 1] = picSignInHash;
+                locationArr[locationArr.length - 2] = albumIdInHash;
+                window.location.pathname = locationArr.join('/');
+            }
+        }
+    </script>
+
+
+<div id="picture-dialog" class="picture-dialog">
+<div class="header">
+<a class="logo" target="_blank" href="/">
+<span class="cmn-baike-logo white"><em class="cmn-icon cmn-icons cmn-icons_logo-bai"></em><em class="cmn-icon cmn-icons cmn-icons_logo-du"></em><em class="cmn-icon cmn-icons cmn-icons_logo-baike"></em></span>
+</a>
+<div class="breadcrumb">
+<a target="_blank" class="album-name" href="/pic/%E5%8D%B7%E7%A7%AF/9411006">卷积图册</a>&nbsp;>&nbsp;<span class="album-desc">词条图片</span>
+</div>
+<div style="clear: both"></div>
+</div>
+<div class="thumbnail" style="z-index: 2; width: 80px; top: 50%; margin-top: -269.5px; right: 12.5%; margin-right: -80px">
+<a class="prev-album" data-album="579443"></a>
+<div class="pic-slider">
+<div class="prev-pic"></div>
+<div class="pic-scroller">
+<div class="pic-list">
+
+<a class="pic-item " title="卷积" data-index="0" data-sign="35a85edf8db1cb13c47d191edf54564e92584ba2" href="/pic/%E5%8D%B7%E7%A7%AF/9411006/0/35a85edf8db1cb13c47d191edf54564e92584ba2">
+<img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D150/sign=5d8b1cc933adcbef01347a039caf2e0e/35a85edf8db1cb13c47d191edf54564e92584ba2.jpg" alt="卷积" style="display: block;width:100px;height:80px;top:0px;left:-10px;">
+</a>
+
+<a class="pic-item selected" title="" data-index="1" data-sign="2f738bd4b31c8701160cdc36267f9e2f0608ffac" href="/pic/%E5%8D%B7%E7%A7%AF/9411006/0/2f738bd4b31c8701160cdc36267f9e2f0608ffac">
+<img src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D150/sign=cc0ec5b10eb30f24359ae806f894d192/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg" alt="" style="display: block;width:428px;height:80px;top:0px;left:-174px;">
+<div class="seleced-cover"></div>
+</a>
+
+<a class="pic-item " title="" data-index="2" data-sign="96dda144ad345982a2ed8d420df431adcaef84fe" href="/pic/%E5%8D%B7%E7%A7%AF/9411006/0/96dda144ad345982a2ed8d420df431adcaef84fe">
+<img src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D150/sign=62545113d6ca7bcb7d7bc32a8e086b3f/96dda144ad345982a2ed8d420df431adcaef84fe.jpg" alt="" style="display: block;width:571px;height:80px;top:0px;left:-245px;">
+</a>
+
+<a class="pic-item " title="perfect spaces卷积混响" data-index="3" data-sign="54baacfb7c1e8e614f4aeae9" href="/pic/%E5%8D%B7%E7%A7%AF/9411006/0/54baacfb7c1e8e614f4aeae9">
+<img src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D150/sign=c4e54827034f78f0800b9ef649310a83/6f061d950a7b020844fce99262d9f2d3572cc888.jpg" alt="perfect spaces卷积混响" style="display: block;width:111px;height:80px;top:0px;left:-15px;">
+</a>
+
+<a class="pic-item " title="卷积与相关分析" data-index="4" data-sign="8a95ad1c9c0d42c887d6b6f5" href="/pic/%E5%8D%B7%E7%A7%AF/9411006/0/8a95ad1c9c0d42c887d6b6f5">
+<img src="https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D150/sign=cf3364d7a4c27d1ea5263fc12bd5adaf/b219ebc4b74543a9992a2cbf1e178a82b901148b.jpg" alt="卷积与相关分析" style="display: block;width:111px;height:80px;top:0px;left:-15px;">
+</a>
+
+<a class="pic-item " title="公式" data-index="5" data-sign="b219ebc4b74543a97ded349d1a178a82b80114e9" href="/pic/%E5%8D%B7%E7%A7%AF/9411006/0/b219ebc4b74543a97ded349d1a178a82b80114e9">
+<img src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D150/sign=2bf47cf5a0c27d1ea5263fc12bd4adaf/b219ebc4b74543a97ded349d1a178a82b80114e9.jpg" alt="公式" style="display: block;width:184px;height:80px;top:0px;left:-52px;">
+</a>
+</div>
+</div>
+<div class="next-pic"></div>
+</div>
+<a class="next-album" data-album="579443" title="卷积应用">
+<img src="https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D290/sign=1dc65753972bd40746c7d4f44b889e9c/377adab44aed2e739f364f578701a18b86d6faea.jpg" alt="卷积应用"/>
+<span>下一图册</span>
+</a>
+<div class="bottom"></div>
+</div>
+<div class="picture-wrap">
+
+<div id="picture" class="picture" style="left:14.5%; top:62px; width:71%; height:600px">
+<img id="imgPicture" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike60%2C5%2C5%2C60%2C20/sign=e1c9c9b8d009b3deffb2ec3aadd607e4/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg" onload="imageResize()" style="visibility:hidden"/>
+<div id="picture-msg-tip" class="msg-tip yahei" style="display:none">
+<a class="close"></a>
+<span class="msg-tip-text"></span>
+</div>
+</div>
+</div>
+<div class="picture-footer yahei">
+<div class="footer-wrap" style="width:1000px; left:50%; margin-left:-500px">
+<div class="description">
+<span class="number">
+<span style="color:#b9bbbf">2</span>/<span style="color:#427cb8">6</span>
+</span>
+<span class="text"></span>
+</div>
+<a class="tool-button doubt j-doubt-link" target="_blank" href="/wikiui/doubt?lemmaId=9411006&picUrl=https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%253Dbaike60%252C5%252C5%252C60%252C20/sign%3De1c9c9b8d009b3deffb2ec3aadd607e4/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg" nslog-type="10300106">质疑</a>
+<a class="tool-button info">信息</a>
+
+<a class="tool-button origin" target="_blanck" href="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike60%2C5%2C5%2C60%2C20/sign=e1c9c9b8d009b3deffb2ec3aadd607e4/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg">原图</a>
+<div class="info-panel">
+<div class="image-size">
+<span>图片尺寸</span>
+<span class="size">387X73</span>
+</div>
+<div class="album-info">
+<span class="from-text">来自</span>
+<span class="album-text">
+<a class="lemma-name" target="_blank" href="/item/%E5%8D%B7%E7%A7%AF/9411006">
+卷积词条</a>-<a class="album-name" target="_blank" href="/pic/%E5%8D%B7%E7%A7%AF/9411006">词条图片</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+    //科学百科任务的词条所有提交,需要自动审核对其做忽略处理. 所以删除图片/绿色通道等规则也不适用于这类词条, 所以把它置顶处理
+    <script>
+      window['__abbaidu_2020_subidgetf'] = function () {
+          var subid = 01000000;
+          return subid;
+      };
+    </script>
+<script async src="https://dlswbr.baidu.com/heicha/mw/abclite-2020-s.js"></script>
+
+</body><script type="text/javascript" src="https://bkssl.bdimg.com/static/wiki-common/js/mod_4302fe0.js"></script>
+<script type="text/javascript" src="https://bkssl.bdimg.com/static/wiki-common/pkg/wiki-common-base_0ce23c8.js"></script>
+<script type="text/javascript" src="https://bkssl.bdimg.com/static/wiki-album/pkg/wiki-album-picture_458b528.js"></script>
+<script type="text/javascript">!function(){        var $ = require('wiki-common:widget/lib/jquery/jquery.js'),
+            urlExt = require('wiki-common:widget/util/url.js'),
+            nslog = require("wiki-common:widget/component/nslog/nslog.js"),
+            PictureDialog = require('wiki-album:widget/picture/pictureDialog/pictureDialog.js');
+        
+        // 百科质疑，增加质疑入口--当前页面链接
+        // var doubtLink = $('.j-doubt-link').attr('href') + '&albumUrl=' + window.location.href;
+        // $('.j-doubt-link').attr('href', doubtLink);
+
+
+        var hash = window.location.hash.substr(1);
+        var albumId = urlExt.getQuery('aid', hash);
+        var pictureSign = urlExt.getQuery('pic', hash);
+        var useHash = !!albumId && albumId != '' && !!pictureSign && pictureSign != '';
+        albumId = useHash ? albumId : '0';
+        pictureSign = useHash ? pictureSign : '2f738bd4b31c8701160cdc36267f9e2f0608ffac';
+
+        var pageAlbumId = "0";
+        var pagePicSign = "2f738bd4b31c8701160cdc36267f9e2f0608ffac";
+
+        var useHash = (!!albumId && albumId != "") && (!!pictureSign && pictureSign != "" && pictureSign != pagePicSign);
+        if (useHash) {
+                            window.location.href = '/pic/%E5%8D%B7%E7%A7%AF/9411006/' +albumId+ '/' + pictureSign;
+                    }
+
+        PictureDialog.getInstance().show({
+            albums: {"579443":{"desc":"\u5377\u79ef\u5e94\u7528","coverpic":"7ab514d1763b0e98562c840b","coverwidth":250,"coverheight":55,"albumTag":null,"coverurl":"https:\/\/gss0.bdstatic.com\/-4o3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D290\/sign=1dc65753972bd40746c7d4f44b889e9c\/377adab44aed2e739f364f578701a18b86d6faea.jpg","total":1,"sign":579443,"next":0,"prev":0},"0":{"desc":"\u8bcd\u6761\u56fe\u7247","coverpic":"35a85edf8db1cb13c47d191edf54564e92584ba2","coverwidth":396,"coverheight":318,"pictures":[{"desc":"\u5377\u79ef","width":396,"height":318,"owner":"hycwuy","src":"35a85edf8db1cb13c47d191edf54564e92584ba2","picId":9614403981,"type":{"view":220,"albumview":200,"oriWithWater":397,"litterImage":200,"authModule":150,"view_new":209,"view_card":268},"sizes":{"220":{"url":"https:\/\/gss1.bdstatic.com\/-vo3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D220\/sign=201d49bfb0b7d0a27fc9039ffbef760d\/35a85edf8db1cb13c47d191edf54564e92584ba2.jpg","width":220,"height":176,"size":220},"200":{"url":"https:\/\/gss1.bdstatic.com\/-vo3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D200\/sign=201d49bfb0b7d0a27fc9039dfbef760d\/35a85edf8db1cb13c47d191edf54564e92584ba2.jpg","width":200,"height":160,"size":200},"397":{"url":"https:\/\/gss1.bdstatic.com\/-vo3dSag_xI4khGkpoWK1HF6hhy\/baike\/c0%3Dbaike80%2C5%2C5%2C80%2C26\/sign=dc1436aa5bee3d6d36cb8f99227f0647\/35a85edf8db1cb13c47d191edf54564e92584ba2.jpg","width":396,"height":318,"size":397},"150":{"url":"https:\/\/gss1.bdstatic.com\/-vo3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D150\/sign=5d8b1cc933adcbef01347a039caf2e0e\/35a85edf8db1cb13c47d191edf54564e92584ba2.jpg","width":150,"height":120,"size":150},"209":{"url":"https:\/\/gss1.bdstatic.com\/-vo3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D209\/sign=003911d43b01213fcf3349dc6de736f8\/35a85edf8db1cb13c47d191edf54564e92584ba2.jpg","width":209,"height":167,"size":209},"268":{"url":"https:\/\/gss1.bdstatic.com\/-vo3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D268\/sign=f1f09d2d03e9390156028a3843ec54f9\/35a85edf8db1cb13c47d191edf54564e92584ba2.jpg","width":268,"height":215,"size":268}},"aid":0,"albumDesc":"\u8bcd\u6761\u56fe\u7247","index":1},{"desc":"","width":387,"height":73,"owner":"","src":"2f738bd4b31c8701160cdc36267f9e2f0608ffac","picId":8059062199,"type":{"view":250,"albumview":120,"oriWithWater":388,"litterImage":200,"authModule":150,"view_new":209,"view_card":268},"sizes":{"250":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D250\/sign=63806e1ae7cd7b89ed6c3d863f254291\/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg","width":250,"height":47,"size":250},"120":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/h%3D120\/sign=ac52f68edcc451dae9f608e986fc52a5\/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg","width":636,"height":120,"size":120},"388":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/c0%3Dbaike60%2C5%2C5%2C60%2C20\/sign=e1c9c9b8d009b3deffb2ec3aadd607e4\/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg","width":387,"height":73,"size":388},"200":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D200\/sign=63806e1ae7cd7b89ed6c3d833f254291\/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg","width":200,"height":37,"size":200},"150":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D150\/sign=cc0ec5b10eb30f24359ae806f894d192\/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg","width":150,"height":28,"size":150},"209":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D209\/sign=c477d9e25bafa40f3cc6c9dd9265038c\/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg","width":209,"height":39,"size":209},"268":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D268\/sign=6694281083025aafd33279cdc3ecab8d\/2f738bd4b31c8701160cdc36267f9e2f0608ffac.jpg","width":268,"height":50,"size":268}},"aid":0,"albumDesc":"\u8bcd\u6761\u56fe\u7247","index":2},{"desc":"","width":436,"height":62,"owner":"","src":"96dda144ad345982a2ed8d420df431adcaef84fe","picId":8059181584,"type":{"view":250,"albumview":120,"oriWithWater":437,"litterImage":200,"authModule":150,"view_new":209,"view_card":268},"sizes":{"250":{"url":"https:\/\/gss0.bdstatic.com\/94o3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D250\/sign=19adcdb29922720e7fcee5ff4bca0a3a\/96dda144ad345982a2ed8d420df431adcaef84fe.jpg","width":250,"height":35,"size":250},"120":{"url":"https:\/\/gss0.bdstatic.com\/94o3dSag_xI4khGkpoWK1HF6hhy\/baike\/h%3D120\/sign=18a00cdd279759ee555064c982fa434e\/96dda144ad345982a2ed8d420df431adcaef84fe.jpg","width":843,"height":120,"size":120},"437":{"url":"https:\/\/gss0.bdstatic.com\/94o3dSag_xI4khGkpoWK1HF6hhy\/baike\/c0%3Dbaike60%2C5%2C5%2C60%2C20\/sign=53f3dfc6cefc1e17e9b284632bf99d66\/96dda144ad345982a2ed8d420df431adcaef84fe.jpg","width":436,"height":62,"size":437},"200":{"url":"https:\/\/gss0.bdstatic.com\/94o3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D200\/sign=19adcdb29922720e7fcee5fa4bca0a3a\/96dda144ad345982a2ed8d420df431adcaef84fe.jpg","width":200,"height":28,"size":200},"150":{"url":"https:\/\/gss0.bdstatic.com\/94o3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D150\/sign=62545113d6ca7bcb7d7bc32a8e086b3f\/96dda144ad345982a2ed8d420df431adcaef84fe.jpg","width":150,"height":21,"size":150},"209":{"url":"https:\/\/gss0.bdstatic.com\/94o3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D209\/sign=1c69daa4eaf81a4c2632ebc9ee2b6029\/96dda144ad345982a2ed8d420df431adcaef84fe.jpg","width":209,"height":29,"size":209},"268":{"url":"https:\/\/gss0.bdstatic.com\/94o3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D268\/sign=7b3a51d38644ebf86d716339e1f8d736\/96dda144ad345982a2ed8d420df431adcaef84fe.jpg","width":268,"height":38,"size":268}},"aid":0,"albumDesc":"\u8bcd\u6761\u56fe\u7247","index":3},{"desc":"perfect spaces\u5377\u79ef\u6df7\u54cd","width":400,"height":290,"owner":"","src":"54baacfb7c1e8e614f4aeae9","picId":1138952255,"type":{"view":220,"albumview":120,"oriWithWater":401,"litterImage":200,"authModule":150,"view_new":209,"view_card":268},"sizes":{"220":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D220\/sign=65a7474c4bfbfbedd859317d48f0f78e\/6f061d950a7b020844fce99262d9f2d3572cc888.jpg","width":220,"height":159,"size":220},"120":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/h%3D120\/sign=44817d120fb30f242a9ae801f895d192\/6f061d950a7b020844fce99262d9f2d3572cc888.jpg","width":165,"height":120,"size":120},"401":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/c0%3Dbaike80%2C5%2C5%2C80%2C26\/sign=7e3c7449304e251ff6faecaac6efa272\/6f061d950a7b020844fce99262d9f2d3572cc888.jpg","width":400,"height":290,"size":401},"200":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D200\/sign=65a7474c4bfbfbedd859317f48f0f78e\/6f061d950a7b020844fce99262d9f2d3572cc888.jpg","width":200,"height":145,"size":200},"150":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D150\/sign=c4e54827034f78f0800b9ef649310a83\/6f061d950a7b020844fce99262d9f2d3572cc888.jpg","width":150,"height":108,"size":150},"209":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D209\/sign=884da0ea8226cffc692ab8b280014a7d\/6f061d950a7b020844fce99262d9f2d3572cc888.jpg","width":209,"height":151,"size":209},"268":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D268\/sign=d4cc540643a98226b8c12c21b282b97a\/6f061d950a7b020844fce99262d9f2d3572cc888.jpg","width":268,"height":194,"size":268}},"aid":0,"albumDesc":"\u8bcd\u6761\u56fe\u7247","index":4},{"desc":"\u5377\u79ef\u4e0e\u76f8\u5173\u5206\u6790","width":753,"height":547,"owner":"","src":"8a95ad1c9c0d42c887d6b6f5","picId":1138953243,"type":{"view":220,"albumview":120,"oriWithWater":754,"litterImage":200,"authModule":150,"view_new":209,"view_card":268},"sizes":{"220":{"url":"https:\/\/gss3.bdstatic.com\/-Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D220\/sign=e70f7106d688d43ff4a996f04d1ed2aa\/b219ebc4b74543a9992a2cbf1e178a82b901148b.jpg","width":220,"height":159,"size":220},"120":{"url":"https:\/\/gss3.bdstatic.com\/-Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/h%3D120\/sign=20cb7c7ef8dcd100d29cfc23428b47be\/b219ebc4b74543a9992a2cbf1e178a82b901148b.jpg","width":165,"height":120,"size":120},"754":{"url":"https:\/\/gss3.bdstatic.com\/-Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/c0%3Dbaike92%2C5%2C5%2C92%2C30\/sign=8fe2135c3a292df583cea447dd583705\/b219ebc4b74543a9992a2cbf1e178a82b901148b.jpg","width":753,"height":547,"size":754},"200":{"url":"https:\/\/gss3.bdstatic.com\/-Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D200\/sign=e70f7106d688d43ff4a996f24d1ed2aa\/b219ebc4b74543a9992a2cbf1e178a82b901148b.jpg","width":200,"height":145,"size":200},"150":{"url":"https:\/\/gss3.bdstatic.com\/-Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D150\/sign=cf3364d7a4c27d1ea5263fc12bd5adaf\/b219ebc4b74543a9992a2cbf1e178a82b901148b.jpg","width":150,"height":108,"size":150},"209":{"url":"https:\/\/gss3.bdstatic.com\/-Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D209\/sign=9ac7da98b6fd5266a72b3b1492189799\/b219ebc4b74543a9992a2cbf1e178a82b901148b.jpg","width":209,"height":151,"size":209},"268":{"url":"https:\/\/gss3.bdstatic.com\/-Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D268\/sign=4ad6628839dbb6fd255be2203124aba6\/b219ebc4b74543a9992a2cbf1e178a82b901148b.jpg","width":268,"height":194,"size":268}},"aid":0,"albumDesc":"\u8bcd\u6761\u56fe\u7247","index":5},{"desc":"\u516c\u5f0f","width":370,"height":161,"owner":"","src":"b219ebc4b74543a97ded349d1a178a82b80114e9","picId":18823760895,"type":{"view":250,"albumview":120,"oriWithWater":371,"litterImage":200,"authModule":150,"view_new":209,"view_card":268},"sizes":{"250":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D250\/sign=03c86924d288d43ff4a996f74d1fd2aa\/b219ebc4b74543a97ded349d1a178a82b80114e9.jpg","width":250,"height":108,"size":250},"120":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/h%3D120\/sign=c40c645cfcdcd100d29cfc23428a47be\/b219ebc4b74543a97ded349d1a178a82b80114e9.jpg","width":275,"height":120,"size":120},"371":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/c0%3Dbaike72%2C5%2C5%2C72%2C24\/sign=0c154fee885494ee932f074b4c9c8b9b\/b219ebc4b74543a97ded349d1a178a82b80114e9.jpg","width":370,"height":161,"size":371},"200":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D200\/sign=03c86924d288d43ff4a996f24d1fd2aa\/b219ebc4b74543a97ded349d1a178a82b80114e9.jpg","width":200,"height":87,"size":200},"150":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D150\/sign=2bf47cf5a0c27d1ea5263fc12bd4adaf\/b219ebc4b74543a97ded349d1a178a82b80114e9.jpg","width":150,"height":65,"size":150},"209":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D209\/sign=7e00c2bab2fd5266a72b3b1492199799\/b219ebc4b74543a97ded349d1a178a82b80114e9.jpg","width":209,"height":90,"size":209},"268":{"url":"https:\/\/gss3.bdstatic.com\/7Po3dSag_xI4khGkpoWK1HF6hhy\/baike\/w%3D268\/sign=ae117aaa3ddbb6fd255be2203125aba6\/b219ebc4b74543a97ded349d1a178a82b80114e9.jpg","width":268,"height":116,"size":268}},"aid":0,"albumDesc":"\u8bcd\u6761\u56fe\u7247","index":6}],"coverurl":"https:\/\/gss1.bdstatic.com\/-vo3dSag_xI4khGkpoWK1HF6hhy\/baike\/s%3D290\/sign=201d49bfb0b7d0a27fc90394fbef760d\/35a85edf8db1cb13c47d191edf54564e92584ba2.jpg","total":6,"prev":579443,"sign":0,"next":579443}},
+            lemmaId: '523298',
+            subLemmaId: '523298',
+            lemmaTitle: '卷积',
+            newLemmaId: '9411006',
+            versionId: '',
+            commitId: '',
+            albumId: albumId,
+            picPageType: '0',
+            pictureSign: pictureSign,
+            lemmaName: '卷积',
+            crumbClick: function() {
+                nslog(10000201);
+            },
+            pictureChanged: function(albumId, picSign) {
+                window.location.hash = 'aid=' + albumId + '&pic=' + picSign;
+                // 百科质疑入口变化逻辑
+                var doubtLink = '/wikiui/doubt?lemmaId='+ '9411006'
+                    + '&fr=albumPicture'
+                    + '&picUrl=' + $('.picture-footer .origin').attr('href')
+                    + '&albumUrl=' + window.location.origin + window.location.pathname;
+
+                $('.j-doubt-link').attr('href', doubtLink);
+            }
+        });    }();
+!function(){      require('wiki-common:widget/component/psLink/psLink');
+    }();</script></html>
