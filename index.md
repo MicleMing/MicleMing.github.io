@@ -15,6 +15,9 @@
 - [webStorage](./FrontEnd/storage/storage.md)
 - [前端测试概念](./FrontEnd/testing/concept.md)
 - [图像卷积](./FrontEnd/webgl/2dimage/process.md)
+- [Ray Tracing I](./FrontEnd/webgl/rayTracker/1.md)
+- [Ray Tracing II](./FrontEnd/webgl/rayTracker/2.md)
+- [Ray Tracing III](./FrontEnd/webgl/rayTracker/3.md)
 
 ## Machine Learning
 
@@ -29,6 +32,7 @@
 - [工程师团队中的信息流动](./CS&Engineering/MSFlow/message-flow.md)
 - [Design System - 设计与代码的碰撞](./CS&Engineering/DesignSystem/design-system.md)
 - [黑客与画家](./Reading/hacker.md)
+- [工程师眼里的敏捷活动](./CS&Engineering/agile/agile.md)
 
 ## Thinking & Life
 
